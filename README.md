@@ -50,9 +50,9 @@ The successful example pauses before booking, displays the requested test/lab/sl
 
 ## Expected scenario behavior
 
-1. **Successful booking** — The model should call report search and extraction, search for exact `Cardiac MRI`, check the supporting lab's slots, then pause for human approval. After approval, it books `2026-10-20T10:30:00` (the earliest mock slot) and records a mock confirmation. The final summary should distinguish completed tests (`CBC`, `Lipid Profile`, `ECG`) from the new booking and include its returned booking ID.
-2. **Unavailable test** — No lab lists `XYZ Advanced Scan`. The model should report no supporting lab and stop before booking. `book_test` independently refuses any unsupported test.
-3. **Missing information** — The exact request `MRI` is ambiguous for booking in this example. The CLI asks which type of MRI is intended without calling booking tools.
+1. **Successful booking** - The model should call report search and extraction, search for exact `Cardiac MRI`, check the supporting lab's slots, then pause for human approval. After approval, it books `2026-10-20T10:30:00` (the earliest mock slot) and records a mock confirmation. The final summary should distinguish completed tests (`CBC`, `Lipid Profile`, `ECG`) from the new booking and include its returned booking ID.
+2. **Unavailable test** - No lab lists `XYZ Advanced Scan`. The model should report no supporting lab and stop before booking. `book_test` independently refuses any unsupported test.
+3. **Missing information** - The exact request `MRI` is ambiguous for booking in this example. The CLI asks which type of MRI is intended without calling booking tools.
 
 Tool order and final wording are selected by the model, so phrasing can vary. Python checks make invalid booking calls fail safely even if the model chooses one.
 
