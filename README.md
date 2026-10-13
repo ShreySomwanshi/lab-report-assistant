@@ -12,20 +12,7 @@ LangGraph's shared message state preserves the conversation and tool results thr
 
 ## Architecture
 
-```text
-User request -> LangGraph agent node
-                       | model chooses tool
-                       +--> booking call? --yes--> approval interrupt
-                       |                          | yes
-                       |                          v
-                       +-- other tool ------> LangGraph tools node <-> mock_data.json
-                       | tool results appended to shared messages
-                       +--------------------> agent node (repeat)
-                                                |
-                                   no more tool calls -> final response
-
-Approval declined -> decline result returned to agent; no booking is created
-```
+![Colorful architecture diagram for the Mock Lab Booking Agent](architecture.svg)
 
 The LLM interprets natural language, selects tools, and uses returned facts to decide the next action. Python performs deterministic operations: searching local records, checking exact capabilities, validating slots, enforcing the earliest slot, preventing duplicates, and storing mock confirmations. LangGraph connects the model node to the tools node and routes back to the model while tool calls remain. Its shared `messages` state contains the user request, tool calls, and tool results.
 
