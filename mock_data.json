@@ -1,0 +1,77 @@
+{
+  "emails": [
+    {
+      "id": "email-1",
+      "type": "lab report",
+      "subject": "CBC and Lipid Profile Results",
+      "body": "Your completed CBC and Lipid Profile blood test results are attached."
+    },
+    {
+      "id": "email-2",
+      "type": "lab report",
+      "subject": "ECG Report",
+      "body": "Your ECG test has been completed. The report is attached."
+    },
+    {
+      "id": "email-3",
+      "type": "unrelated",
+      "subject": "Weekend promotion",
+      "body": "Save on kitchen appliances this weekend."
+    }
+  ],
+  "completed_test_names": [
+    "CBC",
+    "Lipid Profile",
+    "ECG",
+    "Chest X-Ray"
+  ],
+  "labs": [
+    {
+      "id": "lab-a",
+      "name": "Northstar Diagnostics",
+      "tests": [
+        "CBC",
+        "X-Ray",
+        "Ultrasound"
+      ],
+      "slots": {}
+    },
+    {
+      "id": "lab-b",
+      "name": "Central Imaging Clinic",
+      "tests": [
+        "MRI",
+        "Cardiac MRI",
+        "CT Scan"
+      ],
+      "slots": {
+        "Cardiac MRI": [
+          "2026-10-20T10:30:00",
+          "2026-10-20T15:00:00",
+          "2026-10-21T09:00:00"
+        ],
+        "MRI": [
+          "2026-10-20T11:00:00"
+        ]
+      }
+    },
+    {
+      "id": "lab-c",
+      "name": "Riverside Medical Imaging",
+      "tests": [
+        "Blood Tests",
+        "MRI"
+      ],
+      "slots": {
+        "MRI": [
+          "2026-10-22T09:30:00"
+        ]
+      }
+    }
+  ],
+  "bookings": [],
+  "availability_checks": [],
+  "created_booking_ids_this_run": [],
+  "confirmed_booking_ids_this_run": [],
+  "confirmations": []
+}

@@ -1,0 +1,295 @@
+PAGES 6\n\nPractical  Assessment  –  Agentic  AI  
+Developer
+ 
+1.  Objective  
+Build  a  small  Agentic  AI  application  that  can  understand  a  user's  request,  decide  what  
+actions
+ 
+are
+ 
+required,
+ 
+invoke
+ 
+the
+ 
+appropriate
+ 
+tools,
+ 
+maintain
+ 
+context
+ 
+across
+ 
+multiple
+ 
+steps,
+ 
+and
+ 
+complete
+ 
+the
+ 
+requested
+ 
+task.
+ 
+The  primary  focus  of  this  assessment  is  agentic  reasoning,  tool/function  calling,  
+workflow
+ 
+orchestration,
+ 
+and
+ 
+handling
+ 
+real-world
+ 
+scenarios
+,
+ 
+rather
+ 
+than
+ 
+UI
+ 
+development.
+ 
+ 
+2.  Scenario  
+Consider  the  following  user  request:  
+"Check  my  previous  lab  reports,  find  which  tests  I  have  already  completed,  find  
+a
+ 
+diagnostic
+ 
+lab
+ 
+that
+ 
+can
+ 
+perform
+ 
+a
+ 
+Cardiac
+ 
+MRI,
+ 
+check
+ 
+the
+ 
+earliest
+ 
+available
+ 
+appointment,
+ 
+book
+ 
+it,
+ 
+and
+ 
+send
+ 
+me
+ 
+the
+ 
+confirmation."
+ 
+Your  AI  agent  should  understand  this  request  and  determine  the  actions  required  to  
+complete
+ 
+it.
+ 
+The  workflow  should  not  simply  be  a  hard-coded  sequence .  The  agent  should  decide  
+which
+ 
+available
+ 
+tools
+ 
+need
+ 
+to
+ 
+be
+ 
+called
+ 
+based
+ 
+on
+ 
+the
+ 
+user's
+ 
+request.
+ 
+ 
+3.  Required  Tools  /  Functions  
+Implement  the  following  tools.  External  services  can  be  mocked  using  JSON  or  local  data .  
+A.  Search  Emails  /  Reports  
+Create  a  tool  such  as:  
+search_emails(query)  
+It  should  search  mock  email/report  data  and  return  relevant  lab  reports  or  test  information.  
+Example  mock  data  can  contain:  \n●  Blood  test  reports  ●  X-Ray  reports  ●  MRI  reports  ●  Health  checkup  reports  ●  Unrelated  emails  
+The  agent  should  identify  only  relevant  information.  
+B.  Extract  Previous  Tests  
+Create  a  tool  such  as:  
+extract_lab_tests(data)  
+The  agent  should  identify  tests  that  the  patient  has  already  completed.  
+Example:  
+●  CBC  ●  Lipid  Profile  ●  ECG  ●  Chest  X-Ray  
+C.  Search  Diagnostic  Labs  
+Create  a  tool  such  as:  
+search_labs(test_name)  
+Maintain  mock  data  for  multiple  diagnostic  labs.  
+Different  labs  should  support  different  tests.  
+Example:  
+Lab  A  
+●  CBC  ●  X-Ray  ●  Ultrasound  
+Lab  B  
+●  MRI  ●  Cardiac  MRI  ●  CT  Scan  
+Lab  C  
+●  Blood  Tests  \n●  MRI  
+The  agent  should  select  a  lab  that  actually  supports  the  requested  test.  
+D.  Check  Appointment  Availability  
+Create:  
+check_availability(lab_id,  test_name)  
+Return  multiple  mock  appointment  slots.  
+For  example:  
+●  28  Aug  –  10:30  AM  ●  28  Aug  –  3:00  PM  ●  29  Aug  –  9:00  AM  
+If  the  user  asks  for  the  earliest  appointment ,  the  system  should  select  accordingly.  
+E.  Book  Appointment  
+Create:  
+book_test(lab_id,  test_name,  slot)  
+It  should  create  a  mock  booking  and  return  a  booking/confirmation  ID.  
+The  system  should  avoid  creating  duplicate  bookings  for  the  same  request.  
+F.  Send  Confirmation  
+Create:  
+send_confirmation(booking_details)  
+No  real  email/SMS  integration  is  required.  
+The  function  can  log/store  the  confirmation  and  return  a  successful  response.  
+ 
+4.  Agent  Requirements  
+The  agent  should  be  capable  of:  
+●  Understanding  natural-language  user  requests.  ●  Determining  which  tools  need  to  be  called.  ●  Calling  tools  in  an  appropriate  sequence.  \n●  Passing  results  from  one  tool  to  another.  ●  Maintaining  context/state  during  the  workflow.  ●  Handling  missing  or  unavailable  information.  ●  Avoiding  unsupported  assumptions.  ●  Returning  a  clear  final  response  after  completing  the  task.  
+You  may  use  any  suitable  LLM  and  agent  framework.  
+Examples  include  OpenAI  tool/function  calling,  LangChain,  LangGraph,  CrewAI,  or  a  custom  
+implementation.
+ 
+Use  of  a  specific  framework  is  not  mandatory .  
+ 
+5.  Important  Scenario  Handling  
+Your  implementation  should  handle  at  least  the  following  cases.  
+Scenario  1  –  Successful  Booking  
+User:  
+"Find  my  previous  tests  and  book  the  earliest  available  Cardiac  MRI."  
+Expected:  
+The  agent  searches  previous  reports  →  identifies  previous  tests  →  searches  appropriate  
+labs
+ 
+→
+ 
+checks
+ 
+availability
+ 
+→
+ 
+books
+ 
+an
+ 
+appointment
+ 
+→
+ 
+sends
+ 
+confirmation.
+ 
+Scenario  2  –  Test  Not  Available  
+User:  
+"Book  XYZ  Advanced  Scan."  
+If  no  lab  supports  the  requested  test,  the  agent  should  return  an  appropriate  response  
+instead
+ 
+of
+ 
+creating
+ 
+an
+ 
+invalid
+ 
+booking.
+ 
+Scenario  3  –  Missing  Information  
+User:  
+"Book  an  MRI  for  me."  
+If  information  required  to  complete  the  booking  is  missing,  the  agent  should  ask  the  user  for  
+the
+ 
+required
+ 
+information
+ 
+rather
+ 
+than
+ 
+making
+ 
+an
+ 
+unsupported
+ 
+assumption.
+ 
+ \n6.  Expected  Final  Response  
+The  final  response  should  clearly  communicate  the  completed  action.  
+A  structured  response  similar  to  the  following  is  acceptable:  
+{    "requestedTest":  "Cardiac  MRI",    "previousTestsFound":  [      "CBC",      "Lipid  Profile",      "ECG"    ],    "lab":  "ABC  Diagnostics",    "appointment":  "28-Aug-2026  10:30  AM",    "bookingId":  "LAB-12345",    "status":  "confirmed"  }  
+The  exact  response  structure  is  up  to  the  candidate.  
+ 
+7.  Technical  Expectations  
+The  solution  should  preferably  use:  
+●  Python  ●  An  LLM  of  your  choice  ●  Tool  /  Function  Calling  ●  REST  API  or  CLI  interface  ●  JSON/mock  data  for  external  systems  
+A  database  is  optional.  
+Frontend/UI  development  is  not  required .  
+ 
+8.  Deliverables  
+Please  submit:  
+1.  Complete  source  code.  2.  README.md containing:  ○  Setup  instructions  ○  How  to  run  the  application  \n○  Architecture/approach  used  ○  LLM/model  used  ○  Agent  framework  used,  if  any  3.  Sample/mock  data  required  to  run  the  application.  4.  Example  requests  demonstrating  at  least  the  three  scenarios  mentioned  above.  5.  .env.example for  any  required  environment  variables.  
+Do  not  commit  API  keys  or  credentials  to  the  repository.  
+ 
+9.  Evaluation  Criteria  
+The  assessment  will  primarily  evaluate:  
+●  Agentic  AI  design  –  Does  the  agent  decide  which  actions/tools  are  required?  ●  Tool/function  calling  –  Are  tools  properly  defined  and  invoked?  ●  Workflow  orchestration  –  Can  outputs  from  one  step  correctly  drive  subsequent  
+actions?
+ ●  Context/state  management  –  Can  the  agent  maintain  information  across  the  
+workflow?
+ ●  Error  handling  –  Does  it  handle  unavailable  tests,  missing  information,  and  failed  
+actions?
+ ●  Prompt/LLM  design  –  Are  instructions  and  tool  descriptions  designed  effectively?  ●  Code  quality  –  Is  the  implementation  structured,  readable,  and  maintainable?  ●  Security  awareness  –  Are  API  keys  and  sensitive  configuration  handled  
+appropriately?
+ 
+ 
+10.  Bonus  –  Optional  
+If  time  permits,  implement  any  one  of  the  following:  
+●  Human  confirmation  before  final  booking.  ●  Retry/fallback  handling  when  a  tool  fails.  ●  Agent  execution/audit  logs  showing  which  tools  were  called.  ●  Basic  conversation  memory  for  follow-up  requests.  ●  Prevent  duplicate  bookings  using  an  idempotency  mechanism.  
+Bonus  features  are  optional  and  should  only  be  attempted  after  the  core  requirements  are  
+complete.
+ 
+  
